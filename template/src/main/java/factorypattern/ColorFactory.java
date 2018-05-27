@@ -8,12 +8,12 @@ import java.lang.reflect.InvocationTargetException;
 public class ColorFactory {
     private static final Logger LOG = LoggerFactory.getLogger(ColorFactory.class);
 
-    public static <T> T getColor(Class<? extends Color> clazz) {
+    public static <T> T getColor(Class<? extends T> clazz) {
         T obj = null;
         try {
-            obj = (T) clazz.getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException |
-                InvocationTargetException | NoSuchMethodException e) {
+            //obj = clazz.getConstructor().newInstance();
+            obj = clazz.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             LOG.error("Fail to get color, error:{}", e.getMessage());
         }
